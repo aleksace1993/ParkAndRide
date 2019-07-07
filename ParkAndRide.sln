@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkAndRide.Api", "ParkAndRide.Api\ParkAndRide.Api.csproj", "{FEB11B6A-7529-465C-9BA6-2AE57F28CBB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkAndRide.Common", "ParkAndRide.Common\ParkAndRide.Common.csproj", "{D855700D-AC45-4B4C-84AA-9317018BCAF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C47E3C8F-79EE-4738-8B46-53D1A6FB311B}"
+	ProjectSection(SolutionItems) = preProject
+		compose\mongo-rabbit.yml = compose\mongo-rabbit.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParkAndRide.Services.Rides", "ParkAndRide.Services.Rides\ParkAndRide.Services.Rides.csproj", "{23D42B39-8293-411C-B991-CDAEA9DB2FA2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FEB11B6A-7529-465C-9BA6-2AE57F28CBB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEB11B6A-7529-465C-9BA6-2AE57F28CBB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEB11B6A-7529-465C-9BA6-2AE57F28CBB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEB11B6A-7529-465C-9BA6-2AE57F28CBB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D855700D-AC45-4B4C-84AA-9317018BCAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D855700D-AC45-4B4C-84AA-9317018BCAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D855700D-AC45-4B4C-84AA-9317018BCAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D855700D-AC45-4B4C-84AA-9317018BCAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23D42B39-8293-411C-B991-CDAEA9DB2FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23D42B39-8293-411C-B991-CDAEA9DB2FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23D42B39-8293-411C-B991-CDAEA9DB2FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23D42B39-8293-411C-B991-CDAEA9DB2FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34B9EA51-E438-4B2C-A8BC-C123C22FE11E}
+	EndGlobalSection
+EndGlobal
