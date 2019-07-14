@@ -12,6 +12,7 @@ namespace ParkAndRide.Common.Mongo
     {
         public static void AddMongo(this ContainerBuilder builder)
         {
+            //Register a default MongoDbOptions, so that we can inject it where we need it.
             builder.Register(context =>
             {
                 var configuration = context.Resolve<IConfiguration>();

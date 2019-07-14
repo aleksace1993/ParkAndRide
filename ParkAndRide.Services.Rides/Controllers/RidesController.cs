@@ -8,6 +8,7 @@ using ParkAndRide.Services.Rides.Domain;
 
 namespace ParkAndRide.Services.Rides.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
     public class RidesController : ControllerBase
     {
@@ -16,7 +17,7 @@ namespace ParkAndRide.Services.Rides.Controllers
         {
             _ridesRepository = ridesRepository;
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             return Ok(await _ridesRepository.FindAsync(r => r.Id == id));

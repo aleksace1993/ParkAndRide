@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ParkAndRide.Common.Mongo
 {
-    public class MongoDbSeeder
+    public class MongoDbSeeder : IMongoDbSeeder
     {
         protected readonly IMongoDatabase _mongoDatabase;
 
