@@ -22,6 +22,11 @@ namespace ParkAndRide.Services.Rides.Controllers
         {
             return Ok(await _ridesRepository.FindAsync(r => r.Id == id));
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Get()
+        //{
+        //    return Ok(await _ridesRepository.GetAsync(c=> c));
+        //}
         [HttpPost]
         public async Task<IActionResult> Post(Ride ride)
         {

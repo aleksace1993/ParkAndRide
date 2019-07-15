@@ -12,6 +12,7 @@ using ParkAndRide.Services.Rides.Domain;
 using ParkAndRide.Common;
 using ParkAndRide.Common.Mongo;
 using ParkAndRide.Common.MVC;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ParkAndRide.Services.Rides
 {
@@ -31,6 +32,17 @@ namespace ParkAndRide.Services.Rides
             //services.AddCustomMvc();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            //swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "ApiGateway",
+                });
+            });
+
+            //
             var builder = new ContainerBuilder();
 
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
@@ -55,6 +67,12 @@ namespace ParkAndRide.Services.Rides
 
             mongoDbInitializer.Initialize();
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
