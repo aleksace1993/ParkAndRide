@@ -42,7 +42,7 @@ namespace ParkAndRide.Services.Rides
                 });
             });
 
-            //
+            //Autofac
             var builder = new ContainerBuilder();
 
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())

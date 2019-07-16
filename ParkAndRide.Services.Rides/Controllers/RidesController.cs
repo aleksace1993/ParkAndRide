@@ -20,18 +20,30 @@ namespace ParkAndRide.Services.Rides.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            return Ok(await _ridesRepository.FindAsync(r => r.Id == id));
+            return Ok(await _ridesRepository.GetAsync(r => r.Id == id));
         }
-        //[HttpGet]
-        //public async Task<IActionResult> Get()
-        //{
-        //    return Ok(await _ridesRepository.GetAsync(c=> c));
-        //}
-        [HttpPost]
-        public async Task<IActionResult> Post(Ride ride)
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
-            
+            return Ok(await _ridesRepository.FindAllAsync(r => true));
+        }
+        [HttpPost]
+        public IActionResult Post(Ride ride)
+        {
+
             return Accepted(_ridesRepository.AddAsync(ride));
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id,Ride ride)
+        {
+
+            var existingRide = await _ridesRepository.GetAsync(r => r.Id == id);
+            if(existingRide == null)
+            {
+                return NotFound();
+            }
+            existingRide.Update(ride);
+            return Accepted(_ridesRepository.UpdateAsync(existingRide));
         }
     }
 }

@@ -8,13 +8,17 @@ namespace ParkAndRide.Services.Rides.Domain
 {
     public class Ride : BaseEntity
     {
-        public Guid RideId { get; private set; }
-        public string CarType { get; private set; }
-        public int NumPassengers { get; private set; }
+        public string CarType { get;  set; }
+        public int NumPassengers { get;  set; }
         //public Driver Driver { get; private set; }
         //public Location LocationFrom { get; private set; }
         //public Location LocationTo { get; private set; }
         //public DateTimeOffset DriveTime { get; private set; }
-        
+        public void Update(Ride newRide)
+        {
+            //Todo: figure out hwo to update things that are not Set.
+            this.CarType = newRide.CarType;
+            this.NumPassengers = newRide.NumPassengers;
+        }
     }
 }

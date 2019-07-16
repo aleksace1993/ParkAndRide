@@ -17,34 +17,29 @@ namespace ParkAndRide.Common.Mongo
             Collection = database.GetCollection<TEntity>(collectionName);
         }
 
-        public Task AddAsync(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            await Collection.InsertOneAsync(entity);
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            await Collection.DeleteOneAsync(e => e.Id == id);
         }
 
-        public Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await Collection.Find(predicate).ToListAsync();
         }
 
-        public Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await Collection.Find(predicate).SingleOrDefaultAsync();
         }
 
-        public Task<TEntity> GetByIdAsync(Guid id)
+        public async Task UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(TEntity entity)
-        {
-            throw new NotImplementedException();
+            await Collection.ReplaceOneAsync(e => e.Id == entity.Id, entity);
         }
     }
 }
