@@ -30,7 +30,6 @@ namespace ParkAndRide.Services.Rides.Controllers
         [HttpPost]
         public IActionResult Post(Ride ride)
         {
-
             return Accepted(_ridesRepository.AddAsync(ride));
         }
         [HttpPut("{id}")]

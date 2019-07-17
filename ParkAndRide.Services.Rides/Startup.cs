@@ -13,6 +13,7 @@ using ParkAndRide.Common;
 using ParkAndRide.Common.Mongo;
 using ParkAndRide.Common.MVC;
 using Swashbuckle.AspNetCore.Swagger;
+using ParkAndRide.Common.CQRS;
 
 namespace ParkAndRide.Services.Rides
 {
@@ -51,6 +52,7 @@ namespace ParkAndRide.Services.Rides
 
             builder.AddMongo();
             builder.AddMongoRepository<Ride>("Rides");
+            builder.AddCQRSDispatchers();
 
             Container = builder.Build();
 
