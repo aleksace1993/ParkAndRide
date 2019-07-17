@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ParkAndRide.Common.CQRS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParkAndRide.Api.Models.Rides
+namespace ParkAndRide.Services.Rides.CQRS.Commands
 {
-    public class Ride
+    public class CreateRide :ICommand
     {
         public Guid Id { get; set; }
         public string CarType { get; set; }
@@ -15,5 +16,9 @@ namespace ParkAndRide.Api.Models.Rides
         //public Location LocationFrom { get; set; }
         //public Location LocationTo { get; set; }
         //public DateTimeOffset DriveTime { get; set; }
+        public CreateRide()
+        {
+
+        }
     }
 }

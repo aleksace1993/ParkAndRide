@@ -12,4 +12,7 @@
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
     <PackageReference Include="ParkAndRide.Common" Version="1.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CQRS\Events\" />
+  </ItemGroup>
 </Project>
