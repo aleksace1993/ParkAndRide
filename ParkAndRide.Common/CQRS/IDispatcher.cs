@@ -7,6 +7,6 @@ namespace ParkAndRide.Common.CQRS
     {
         Task SendAsync<T>(T command) where T : ICommand;
 
-        Task<TResult> QueryAsync<TResult>(IQuery query);
+        Task<TResult> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery;
     }
 }

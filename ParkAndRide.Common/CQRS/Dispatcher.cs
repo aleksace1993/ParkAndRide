@@ -13,9 +13,11 @@ namespace ParkAndRide.Common.CQRS
             _componentContext = componentContext;
         }
 
-        public async Task<TResult> QueryAsync<TResult>(IQuery query)
+        public async Task<TResult> QueryAsync<TQuery,TResult>(TQuery query) where TQuery : IQuery
         {
-            //TODO: Figure this out
+
+            //Different sollution without the TQuery generic parameter
+            //public async Task<TResult> QueryAsync<TResult>(IQuery query)
             // var handlerType = typeof(IQueryHandler<,>)
             //     .MakeGenericType(query.GetType(), typeof(TResult));
             //
@@ -23,7 +25,8 @@ namespace ParkAndRide.Common.CQRS
             //
             // return await handler.HandleAsync((dynamic)query);
 
-            var queryHandler = _componentContext.Resolve<IQueryHandler<IQuery, TResult>>();
+            //Note: Easier solution with both the input type and the Result type supplied, resolved successfully at runtime
+            var queryHandler = _componentContext.Resolve<IQueryHandler<TQuery, TResult>>();
             return await queryHandler.HandleAsync(query);
         }
 

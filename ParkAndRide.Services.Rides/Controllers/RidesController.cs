@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ParkAndRide.Common.CQRS;
 using ParkAndRide.Common.Mongo;
+using ParkAndRide.Services.Rides.CQRS.Commands;
 using ParkAndRide.Services.Rides.CQRS.Queries;
 using ParkAndRide.Services.Rides.Domain;
 using ParkAndRide.Services.Rides.Dto;
@@ -26,20 +27,21 @@ namespace ParkAndRide.Services.Rides.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] GetRide query)
         {
-            return Ok(await _dispatcher.QueryAsync<RideDto>(query));
+            return Ok(await _dispatcher.QueryAsync<GetRide, RideDto>(query));
         }
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] BrowseRides query)
         {
-            return Ok(await _dispatcher.QueryAsync<IEnumerable<RideDto>>(query));
+            return Ok(await _dispatcher.QueryAsync<BrowseRides,IEnumerable<RideDto>>(query));
         }
         [HttpPost]
-        public IActionResult Post(Ride ride)
+        public IActionResult Post(CreateRide newRide)
         {
+            var ride = new Ride(newRide);
             return Accepted(_ridesRepository.AddAsync(ride));
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id,Ride ride)
+        public async Task<IActionResult> Put(Guid id,UpdateRide ride)
         {
 
             var existingRide = await _ridesRepository.GetAsync(r => r.Id == id);
@@ -47,7 +49,7 @@ namespace ParkAndRide.Services.Rides.Controllers
             {
                 return NotFound();
             }
-            //existingRide.Update(ride);
+            existingRide.Update(ride);
             return Accepted(_ridesRepository.UpdateAsync(existingRide));
         }
         //[HttpDelete("{id}")]
