@@ -16,10 +16,6 @@ namespace ParkAndRide.Services.Rides.Domain
         //public Location LocationFrom { get; private set; }
         //public Location LocationTo { get; private set; }
         //public DateTimeOffset DriveTime { get; private set; }
-        public Ride()
-        {
-
-        }
         public Ride(CreateRide newRide)
         {
             CarType = newRide.CarType;
