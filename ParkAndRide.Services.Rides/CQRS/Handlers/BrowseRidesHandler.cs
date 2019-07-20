@@ -24,9 +24,8 @@ namespace ParkAndRide.Services.Rides.CQRS.Handlers
 
             if(!query.Empty)
             {
-                //Todo: Expand the query
-               IEnumerable<Ride> searchedRides = await _crudRepository.FindAllAsync(r => r.DriverName == query.DriverName 
-                                                                               || r.CarType == query.CarType);
+                //Todo: Expand the query to get all the filtered rides
+               IEnumerable<Ride> searchedRides = await _crudRepository.FindAllAsync(r => r.CarType == query.CarType);
                 return RideDto.FromRides(searchedRides);
             }
             IEnumerable<Ride> allRides = await _crudRepository.FindAllAsync(r => true);

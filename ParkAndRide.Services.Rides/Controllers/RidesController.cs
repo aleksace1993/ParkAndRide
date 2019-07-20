@@ -30,7 +30,7 @@ namespace ParkAndRide.Services.Rides.Controllers
             return Ok(await _dispatcher.QueryAsync<GetRide, RideDto>(query));
         }
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] BrowseRides query)
+        public async Task<IActionResult> Get(BrowseRides query)
         {
             return Ok(await _dispatcher.QueryAsync<BrowseRides,IEnumerable<RideDto>>(query));
         }
