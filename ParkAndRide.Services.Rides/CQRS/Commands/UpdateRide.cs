@@ -12,6 +12,8 @@ namespace ParkAndRide.Services.Rides.CQRS.Commands
         public string CarType { get; set; }
         public int NumPassengers { get; set; }
         public string DriverName { get; set; }
+        public DateTime RideDate { get; set; }
+
         //public Driver Driver { get; set; }
         //public Location LocationFrom { get; set; }
         //public Location LocationTo { get; set; }

@@ -11,11 +11,10 @@ namespace ParkAndRide.Services.Rides.CQRS.Queries
     public class BrowseRides : IQuery
     {
         public string DriverName { get; set; }
-        public decimal MinimalCost { get; set; }
-        public decimal MaximalCost { get; set; }
         public string CarType { get; set; }
         public DateTime MinimalSearchDate { get; set; }
         public DateTime MaximalSearchDate { get; set; }
+        public decimal MaximumCost { get; set; }
         public BrowseRides()
         {
 
@@ -28,8 +27,7 @@ namespace ParkAndRide.Services.Rides.CQRS.Queries
             {
                 return DriverName == null &&
                     CarType == null &&
-                    MinimalCost == default(decimal) &&
-                    MaximalCost == default(decimal) &&
+                    MaximumCost == default(decimal) &&
                     MinimalSearchDate == default(DateTime) &&
                     MaximalSearchDate == default(DateTime);
             }

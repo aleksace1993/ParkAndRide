@@ -12,6 +12,8 @@ namespace ParkAndRide.Services.Rides.Domain
         public string CarType { get;  set; }
         public int NumPassengers { get;  set; }
         public string DriverName { get; set; }
+        public DateTime rideDate { get; set; }
+        public decimal Cost { get; set; }
         //public Driver Driver { get; private set; }
         //public Location LocationFrom { get; private set; }
         //public Location LocationTo { get; private set; }
@@ -21,6 +23,8 @@ namespace ParkAndRide.Services.Rides.Domain
             CarType = newRide.CarType;
             NumPassengers = newRide.NumPassengers;
             DriverName = newRide.DriverName;
+            rideDate= newRide.RideDate;
+            Cost = newRide.Cost;
         }
         public void Update(UpdateRide newRide)
         {
@@ -28,6 +32,17 @@ namespace ParkAndRide.Services.Rides.Domain
             this.CarType = newRide.CarType;
             this.NumPassengers = newRide.NumPassengers;
             this.DriverName = newRide.DriverName;
+            UpdateRideDate(newRide.RideDate);
+        }
+        public void UpdateRideDate(DateTime newDate)
+        {
+            //Todo: Fire an event for changing dates.
+            if(newDate > DateTime.Now)
+            {
+                this.rideDate = newDate;
+                //Trigger domain event, from here or from the UpdateRide Handler.
+            }
+            
         }
     }
 }

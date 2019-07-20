@@ -21,14 +21,34 @@ namespace ParkAndRide.Services.Rides.CQRS.Handlers
 
         public async Task<IEnumerable<RideDto>> HandleAsync(BrowseRides query)
         {
-
-            if(!query.Empty)
-            {
-                //Todo: Expand the query to get all the filtered rides
-               IEnumerable<Ride> searchedRides = await _crudRepository.FindAllAsync(r => r.CarType == query.CarType);
-                return RideDto.FromRides(searchedRides);
-            }
             IEnumerable<Ride> allRides = await _crudRepository.FindAllAsync(r => true);
+            if (!query.Empty)
+            {
+                if(query.MaximalSearchDate != default(DateTime) && query.MinimalSearchDate != default(DateTime))
+                {
+                    allRides = allRides.Where(r =>r.rideDate >= query.MinimalSearchDate && 
+                                                  r.rideDate <= query.MaximalSearchDate);
+                }
+                if(query.MaximumCost != default(decimal))
+                {
+                    allRides = allRides.Where(r => r.Cost < query.MaximumCost);
+                }
+                if(query.DriverName != null)
+                {
+                    allRides = allRides.Where(r => r.DriverName == query.DriverName);
+                }
+                if (query.CarType != null)
+                {
+                    allRides = allRides.Where(r => r.CarType == query.CarType);
+                }
+                //if (query.LocationName != null)
+                //{
+                //    allRides = allRides.Where(r => r.Location.Name == query.LocationName);
+                //}
+             
+            }
+            //query is empty retrieve all rides
+            
             return RideDto.FromRides(allRides);
         }
     }
