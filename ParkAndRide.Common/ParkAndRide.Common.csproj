@@ -13,6 +13,8 @@
     <Title>ParkAndRide.Common</Title>
     <PackageId>ParkAndRide.Common</PackageId>
     <PackageTags>ParkAndRide.Common</PackageTags>
+    <Copyright />
+    <PackageLicenseExpression></PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

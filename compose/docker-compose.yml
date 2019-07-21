@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+  rides-service:
+    image: parkandride/rides
+    container_name: rides-service
+    ports:
+      - '5001:5000'
+    networks:
+      - 'park-and-ride'
+
+networks:
+  park-and-ride:
+    name: park-and-ride-network
