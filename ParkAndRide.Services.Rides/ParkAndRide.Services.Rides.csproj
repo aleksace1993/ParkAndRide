@@ -12,6 +12,14 @@
     <ProjectReference Include="..\ParkAndRide.Common\ParkAndRide.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="scripts\docker-build.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scripts\docker-build.sh">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>

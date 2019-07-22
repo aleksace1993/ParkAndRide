@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ParkAndRide.Common.Types;
 
 namespace ParkAndRide.Services.Rides.Controllers
 {
@@ -14,7 +15,8 @@ namespace ParkAndRide.Services.Rides.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+        
+            return new string[] {"value2" };
         }
 
         // GET api/values/5

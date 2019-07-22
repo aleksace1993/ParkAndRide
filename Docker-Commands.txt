@@ -1,1 +1,5 @@
 docker-compose -f ./mongo-rabbit.yml up -run docker compose for the mongodb.
+
+              ##image name                     ##the two dots make the previous directory as the context not the current one
+docker build -t parkandride.services.rides ..
+docker run -t parkandride.servies.rides -name myPARKANDRIDESERVICE

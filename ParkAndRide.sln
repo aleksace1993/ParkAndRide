@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParkAndRide.Common", "ParkA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C47E3C8F-79EE-4738-8B46-53D1A6FB311B}"
 	ProjectSection(SolutionItems) = preProject
+		scripts\docker-build-all.sh = scripts\docker-build-all.sh
 		Docker-Commands.txt = Docker-Commands.txt
+		compose\docker-compose.yml = compose\docker-compose.yml
 		compose\mongo-rabbit.yml = compose\mongo-rabbit.yml
 	EndProjectSection
 EndProject
