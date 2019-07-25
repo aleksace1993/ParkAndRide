@@ -29,8 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
-      "environmentVariables": {},
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/ace",
       "httpPort": 52359
     }
   }
