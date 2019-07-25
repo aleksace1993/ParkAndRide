@@ -18,7 +18,10 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime AS final
 WORKDIR /app 
 #copy everything from app/out
 COPY --from=publish /app/out .
+
+#the env variables have to be here, configure ports 5000 to be valid and specific docker environment for the different services settings
 ENV ASPNETCORE_ENVIRONMENT docker
 ENV ASPNETCORE_URLS http://*:5000
+
 EXPOSE 5000
 ENTRYPOINT ["dotnet", "ParkAndRide.Services.Rides.dll"]
