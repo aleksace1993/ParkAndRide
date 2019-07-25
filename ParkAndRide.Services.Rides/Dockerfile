@@ -1,22 +1,21 @@
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["ParkAndRide.Services.Rides/ParkAndRide.Services.Rides.csproj", "ParkAndRide.Services.Rides/"]
-COPY ["ParkAndRide.Common/ParkAndRide.Common.csproj", "ParkAndRide.Common/"]
+#Copy the folders from the HD to the Container (avoid copying everything, since we're working 1 directory behind)
+COPY ["ParkAndRide.Services.Rides/", "ParkAndRide.Services.Rides/"]
+COPY ["ParkAndRide.Common/", "ParkAndRide.Common/"]
 
-#restore and build common
-RUN dotnet build "/src/ParkAndRide.Common/ParkAndRide.Common.csproj" -c Release -o /src/ParkAndRide.Common
+#this coppies all the files from the PC dir to the Container dir (not needed cause it will copy the Api project and others also)
+#COPY . .
 
-#restore  Rides
-RUN dotnet restore "/src/ParkAndRide.Services.Rides/ParkAndRide.Services.Rides.csproj"
-COPY . .
-
-FROM build AS publish
-WORKDIR "/src/ParkAndRide.Services.Rides"
 #run the publish inside the app/out folder
-RUN dotnet publish "ParkAndRide.Services.Rides.csproj" -c Release -o /app/out
+FROM build as publish
+#this restores all the dependencies of Rides and Common and puts them into app/out... in publish layer
+RUN dotnet publish "ParkAndRide.Services.Rides/ParkAndRide.Services.Rides.csproj" -c Release -o /app/out
 
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS final
+#use this to inspect directories without dotnet entrypoint
+#FROM ubuntu:18.04
 WORKDIR /app 
 #copy everything from app/out
 COPY --from=publish /app/out .
