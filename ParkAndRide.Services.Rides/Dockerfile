@@ -18,5 +18,7 @@ FROM microsoft/dotnet:2.2-aspnetcore-runtime AS final
 WORKDIR /app 
 #copy everything from app/out
 COPY --from=publish /app/out .
+ENV ASPNETCORE_ENVIRONMENT docker
+ENV ASPNETCORE_URLS http://*:5000
 EXPOSE 5000
 ENTRYPOINT ["dotnet", "ParkAndRide.Services.Rides.dll"]
