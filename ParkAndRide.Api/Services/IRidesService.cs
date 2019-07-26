@@ -1,21 +1,21 @@
-﻿using ParkAndRide.Api.Models.Rides;
+﻿using ParkAndRide.Api.Dtos.Ride.RideDto;
 using ParkAndRide.Api.Queries;
 using RestEase;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ParkAndRide.Api.Services
 {
+    [SerializationMethods(Query = QuerySerializationMethod.Serialized)]
     public interface IRidesService
     {
         [AllowAnyStatusCode]
         [Get("rides/{id}")]
-        Task<Ride> GetAsync([Path] Guid id);
+        Task<RideDto> GetAsync([Path] Guid id);
         
         [AllowAnyStatusCode]
         [Get("rides")]
-        Task<IEnumerable<Ride>> BrowseAsync([Query] BrowseRides query);
+        Task<IEnumerable<RideDto>> BrowseAsync([Query] BrowseRides query);
     }
 }
