@@ -33,8 +33,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:5000/api/values",
-      "applicationUrl": "http://localhost:5000"
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/values"
     }
   }
 }
