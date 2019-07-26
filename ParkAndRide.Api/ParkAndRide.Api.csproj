@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <UserSecretsId>502db29b-7652-4e2b-9495-e760942dcc99</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
@@ -12,6 +10,14 @@
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)' == 'Release'">
     <ProjectReference Include="..\ParkAndRide.Common\ParkAndRide.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="scripts\docker-build.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="scripts\docker-build.sh">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />

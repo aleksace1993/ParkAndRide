@@ -1,4 +1,6 @@
 ﻿using ParkAndRide.Api.Models.Rides;
+using ParkAndRide.Api.Queries;
+using RestEase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +10,12 @@ namespace ParkAndRide.Api.Services
 {
     public interface IRidesService
     {
-        //[AllowAnyStatusCode]
-        //[Get("products/{id}")]
-        //Task<Ride> GetAsync([Path] Guid id);
-        //
-        //[AllowAnyStatusCode]
-        //[Get("products")]
-        //Task<PagedResult<Product>> BrowseAsync([Query] BrowseProducts query);
+        [AllowAnyStatusCode]
+        [Get("rides/{id}")]
+        Task<Ride> GetAsync([Path] Guid id);
+        
+        [AllowAnyStatusCode]
+        [Get("rides")]
+        Task<IEnumerable<Ride>> BrowseAsync([Query] BrowseRides query);
     }
 }

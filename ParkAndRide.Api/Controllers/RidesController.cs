@@ -20,25 +20,20 @@ namespace ParkAndRide.Api.Controllers
         {
             _ridesService = ridesService;
         }
+
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult<string> Get()
+        public async Task<IActionResult> Get([FromQuery] BrowseRides query)
         {
-            return "lol";
+           return Ok(await _ridesService.BrowseAsync(query));
         }
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Get([FromQuery] BrowseRides query)
-        //{
-        //   return await _ridesService.BrowseAsync(query);
-        //}
-        //
-        //[HttpGet("{id}")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Get(Guid id)
-        //{
-        //    return await _ridesService.GetAsync(id);
-        //}
+        
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            return Ok(await _ridesService.GetAsync(id));
+        }
         //[HttpPost]
         //public async Task<IActionResult> Post(CreateProduct command)
         //{ 

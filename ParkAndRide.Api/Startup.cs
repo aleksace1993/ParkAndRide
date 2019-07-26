@@ -10,7 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ParkAndRide.Api.Services;
 using Swashbuckle.AspNetCore.Swagger;
+using ParkAndRide.Common.RestEase;
 
 namespace ParkAndRide.Api
 {
@@ -27,7 +29,17 @@ namespace ParkAndRide.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", cors =>
+                        cors.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials()
+                            .WithExposedHeaders(new[] { "X-Operation", "X-Resource", "X-Total-Count" }));
+            });
+            services.RegisterServiceForwarder<IRidesService>("rides-service");
             //swagger
             services.AddSwaggerGen(c =>
             {
@@ -46,13 +58,7 @@ namespace ParkAndRide.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
+            app.UseCors("CorsPolicy");
             app.UseMvc();
 
 
