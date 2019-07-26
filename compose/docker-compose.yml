@@ -1,6 +1,14 @@
 version: "3.5"
 
 services:
+  api-gateway:
+    image: parkandride.api-gateway
+    container_name: api-gateway
+    ports:
+      - '5000:5000'
+    networks:
+      - park-and-ride
+
   rides-service:
     image: parkandride.services.rides
     container_name: rides-service

@@ -1,6 +1,6 @@
 #!/bin/bash
 BUILD=./scripts/docker-build.sh
-REPOSITORIES=(ParkAndRide.Services.Rides)
+REPOSITORIES=(ParkAndRide.Api ParkAndRide.Services.Rides)
 
 for REPOSITORY in ${REPOSITORIES[*]}
 do

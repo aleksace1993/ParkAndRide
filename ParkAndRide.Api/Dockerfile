@@ -1,21 +1,17 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
-WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["ParkAndRide.Api/ParkAndRide.Api.csproj", "ParkAndRide.Api/"]
-COPY ["ParkAndRide.Common/ParkAndRide.Common.csproj", "ParkAndRide.Common/"]
-RUN dotnet restore "ParkAndRide.Api/ParkAndRide.Api.csproj"
-COPY . .
-WORKDIR "/src/ParkAndRide.Api"
-RUN dotnet build "ParkAndRide.Api.csproj" -c Release -o /app
+COPY ["ParkAndRide.Api/", "ParkAndRide.Api/"]
+COPY ["ParkAndRide.Common/", "ParkAndRide.Common/"]
 
 FROM build AS publish
-RUN dotnet publish "ParkAndRide.Api.csproj" -c Release -o /app
+RUN dotnet publish "ParkAndRide.Api/ParkAndRide.Api.csproj" -c Release -o /app/out
 
-FROM base AS final
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS final
 WORKDIR /app
-COPY --from=publish /app .
+#copy the published files from /app/out to current workdir
+COPY --from=publish /app/out .
+ENV ASPNETCORE_ENVIRONMENT docker
+ENV ASPNETCORE_URLS http://*:5000
+
+EXPOSE 5000
 ENTRYPOINT ["dotnet", "ParkAndRide.Api.dll"]
