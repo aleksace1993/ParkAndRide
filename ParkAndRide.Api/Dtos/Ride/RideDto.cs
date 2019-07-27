@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ParkAndRide.Api.Dtos.Ride.RideDto
+namespace ParkAndRide.Api.Dtos.Ride
 {
     public class RideDto
     {
@@ -13,5 +13,9 @@ namespace ParkAndRide.Api.Dtos.Ride.RideDto
         public decimal Cost { get; set; }
         public string DriverName { get; set; }
         public DateTime RideDate { get; set; }
+        public RideDto()
+        {
+
+        }
     }
 }

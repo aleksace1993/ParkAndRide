@@ -23,7 +23,7 @@ namespace ParkAndRide.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Get([FromQuery] BrowseRides query)
+        public async Task<IActionResult> Get([FromBody]BrowseRides query)
         {
            return Ok(await _ridesService.BrowseAsync(query));
         }

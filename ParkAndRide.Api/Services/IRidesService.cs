@@ -1,4 +1,4 @@
-﻿using ParkAndRide.Api.Dtos.Ride.RideDto;
+﻿using ParkAndRide.Api.Dtos.Ride;
 using ParkAndRide.Api.Queries;
 using RestEase;
 using System;
@@ -16,6 +16,6 @@ namespace ParkAndRide.Api.Services
         
         [AllowAnyStatusCode]
         [Get("rides")]
-        Task<IEnumerable<RideDto>> BrowseAsync([Query] BrowseRides query);
+        Task<IEnumerable<RideDto>> BrowseAsync([Body]BrowseRides query);
     }
 }

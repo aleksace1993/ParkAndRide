@@ -12,8 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="scripts\docker-build.sh" />
+    <None Remove="scripts\dotnet-run.sh" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="scripts\dotnet-run.sh">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="scripts\docker-build.sh">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
