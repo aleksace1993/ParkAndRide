@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		scripts\docker-build-all.sh = scripts\docker-build-all.sh
 		Docker-Commands.txt = Docker-Commands.txt
 		compose\docker-compose.yml = compose\docker-compose.yml
+		scripts\dotnet-run-all.sh = scripts\dotnet-run-all.sh
 		compose\mongo-rabbit.yml = compose\mongo-rabbit.yml
 	EndProjectSection
 EndProject
