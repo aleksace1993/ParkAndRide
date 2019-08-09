@@ -1,11 +1,13 @@
-﻿using System;
+﻿using ParkAndRide.Common.CQRS;
+using ParkAndRide.Common.RabbitMq.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ParkAndRide.Api.Commands.Ride
 {
-    public class CreateRide
+    public class CreateRide : ICommand
     {
         public Guid Id { get; set; }
         public string CarType { get; set; }
@@ -18,6 +20,16 @@ namespace ParkAndRide.Api.Commands.Ride
         public CreateRide()
         {
 
+        }
+        //Todo: We dont need these here, figure out what to do
+        public IRejectedEvent Error(Exception e)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ISucceededEvent Success()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,6 +13,10 @@ using Microsoft.Extensions.Options;
 using ParkAndRide.Api.Services;
 using Swashbuckle.AspNetCore.Swagger;
 using ParkAndRide.Common.RestEase;
+using Autofac;
+using System.Reflection;
+using Autofac.Extensions.DependencyInjection;
+using ParkAndRide.Common.CQRS;
 
 namespace ParkAndRide.Api
 {
@@ -26,7 +30,7 @@ namespace ParkAndRide.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -40,6 +44,15 @@ namespace ParkAndRide.Api
                             .WithExposedHeaders(new[] { "X-Operation", "X-Resource", "X-Total-Count" }));
             });
             services.RegisterServiceForwarder<IRidesService>("rides-service");
+
+            var builder = new ContainerBuilder();
+            builder.RegisterAssemblyTypes(Assembly.GetEntryAssembly())
+                    .AsImplementedInterfaces();
+            builder.Populate(services);
+            builder.AddRabbitMq();
+            builder.AddCQRSDispatchers();;
+
+            IContainer Container = builder.Build();
             //swagger
             services.AddSwaggerGen(c =>
             {
@@ -49,6 +62,8 @@ namespace ParkAndRide.Api
                     Title = "ApiGateway",
                 });
             });
+
+            return new AutofacServiceProvider(Container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +75,7 @@ namespace ParkAndRide.Api
             }
             app.UseCors("CorsPolicy");
             app.UseMvc();
-
+            app.UseRabbitMq();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

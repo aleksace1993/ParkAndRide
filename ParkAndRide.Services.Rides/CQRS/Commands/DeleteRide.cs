@@ -1,4 +1,5 @@
 ﻿using ParkAndRide.Common.CQRS;
+using ParkAndRide.Common.RabbitMq.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,16 @@ namespace ParkAndRide.Services.Rides.CQRS.Commands
         public DeleteRide(Guid id)
         {
             this.Id = id;
+        }
+
+        public IRejectedEvent Error(Exception e)
+        {
+            return new DeleteRideRejected(e.Message, "delete_ride_rejected");
+        }
+
+        public ISucceededEvent Success()
+        {
+            throw new NotImplementedException();
         }
     }
 }

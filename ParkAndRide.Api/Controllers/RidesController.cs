@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ParkAndRide.Api.Commands.Ride;
 using ParkAndRide.Api.Queries;
 using ParkAndRide.Api.Services;
+using ParkAndRide.Common.RabbitMq;
 
 namespace ParkAndRide.Api.Controllers
 {
@@ -15,6 +17,7 @@ namespace ParkAndRide.Api.Controllers
     public class RidesController : ControllerBase
     {
         private IRidesService _ridesService;
+        private readonly IBusPublisher _busPublisher;
 
         public RidesController(IRidesService ridesService)
         {
@@ -34,12 +37,13 @@ namespace ParkAndRide.Api.Controllers
         {
             return Ok(await _ridesService.GetAsync(id));
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Post(CreateProduct command)
-        //{ 
-        //    await SendAsync(command.BindId(c => c.Id),
-        //        resourceId: command.Id, resource: "products");
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Post(CreateRide command)
+        {
+            await _busPublisher.SendAsync(command, new CorrelationContext());
+            return Accepted();
+               
+        }
         //
         //[HttpPut("{id}")]
         //public async Task<IActionResult> Put(Guid id, UpdateProduct command)

@@ -11,10 +11,23 @@ services:
         volumes:
         - mongo:/data/dbMongo
 
+     rabbitmq:
+        image: rabbitmq:3
+        container_name: rabbitmq
+        ports:
+        - 5672:5672
+         - 15672:15672
+         networks:
+         - park-and-ride
+        volumes: 
+         - rabbitmq:/var/lib/rabbitmq
+
 networks:
   park-and-ride:
     name: park-and-ride-network
 
 volumes:
   mongo:
+    driver: local
+  rabbitmq:
     driver: local

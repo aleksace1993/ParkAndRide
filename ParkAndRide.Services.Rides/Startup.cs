@@ -14,6 +14,8 @@ using ParkAndRide.Common.Mongo;
 using ParkAndRide.Common.MVC;
 using Swashbuckle.AspNetCore.Swagger;
 using ParkAndRide.Common.CQRS;
+using ParkAndRide.Services.Rides.CQRS.Commands;
+using ParkAndRide.Common.RabbitMq;
 
 namespace ParkAndRide.Services.Rides
 {
@@ -53,7 +55,7 @@ namespace ParkAndRide.Services.Rides
             builder.AddMongo();
             builder.AddMongoRepository<Ride>("Rides");
             builder.AddCQRSDispatchers();
-
+            builder.AddRabbitMq();
             Container = builder.Build();
 
             return new AutofacServiceProvider(Container);
@@ -69,6 +71,11 @@ namespace ParkAndRide.Services.Rides
 
             mongoDbInitializer.Initialize();
             app.UseMvc();
+            //TODO: Figure a better way of doing this
+            app.UseRabbitMq()
+               .SubscribeCommand<CreateRide>();
+           // app.UseRabbitMq()
+           //    .SubscribeCommand<CreateRide>(onError: (cmd, e) => { throw new Exception("could not execute command" + cmd.CarType); });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

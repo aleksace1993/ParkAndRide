@@ -43,6 +43,10 @@
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
+    <PackageReference Include="RawRabbit" Version="1.10.4" />
+    <PackageReference Include="RawRabbit.Attributes" Version="1.10.4" />
+    <PackageReference Include="RawRabbit.DependencyInjection.Autofac" Version="1.10.4" />
+    <PackageReference Include="RawRabbit.Extensions" Version="1.10.4" />
     <PackageReference Include="RestEase" Version="1.4.7" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using ParkAndRide.Common.CQRS;
+using ParkAndRide.Common.RabbitMq.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,16 @@ namespace ParkAndRide.Services.Rides.CQRS.Commands
         public UpdateRide()
         {
 
+        }
+
+        public IRejectedEvent Error(Exception e)
+        {
+            return new UpdateRideRejected(e.Message, "update_ride_rejected");
+        }
+
+        public ISucceededEvent Success()
+        {
+            throw new NotImplementedException();
         }
     }
 }

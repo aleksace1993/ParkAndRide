@@ -1,4 +1,6 @@
 ﻿using ParkAndRide.Common.CQRS;
+using ParkAndRide.Common.RabbitMq.Messages;
+using ParkAndRide.Services.Rides.CQRS.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,6 +29,16 @@ namespace ParkAndRide.Services.Rides.CQRS.Commands
         public CreateRide()
         {
 
+        }
+
+        public IRejectedEvent Error(Exception e)
+        {
+            return new CreateRideRejected(e.Message, "create_ride_rejected");
+        }
+
+        public ISucceededEvent Success()
+        {
+            throw new NotImplementedException();
         }
     }
 }

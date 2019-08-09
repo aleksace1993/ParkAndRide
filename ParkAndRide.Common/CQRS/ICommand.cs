@@ -1,8 +1,12 @@
-﻿using ParkAndRide.Common.Messages;
+﻿using ParkAndRide.Common.RabbitMq.Messages;
+using System;
 
 namespace ParkAndRide.Common.CQRS
 {
-    public interface ICommand : IMessage
+    //Note: Every command should create an event upon success or error
+    public interface ICommand : IBusMessage
     {
+        IRejectedEvent Error(Exception e);
+        ISucceededEvent Success();
     }
 }
